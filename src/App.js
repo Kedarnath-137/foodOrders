@@ -1,25 +1,31 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import Menu from './Components/Menu'; // Ensure correct path
+import Order from './Components/Order'; // Ensure correct path
+import OrderHistory from "./Components/OrderHistory";
 import './App.css';
 
-function App() {
+const App = () => {
+  const [currentOrder, setCurrentOrder] = useState([]);
+  const [orderHistory, setOrderHistory] = useState([]);
+
+  const addToOrder = (item) => {
+    setCurrentOrder([...currentOrder, item]);
+  };
+
+  const placeOrder = (orderDetails) => {
+    setOrderHistory([...orderHistory, orderDetails]);
+    setCurrentOrder([]); // Clear current order after placing
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Menu addToOrder={addToOrder} /> {/* Ensure this is rendered */}
+      <Order order={currentOrder} placeOrder={placeOrder} />
+      <OrderHistory orders={orderHistory} />
+      
     </div>
   );
-}
+};
 
 export default App;
+

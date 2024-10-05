@@ -1,0 +1,60 @@
+.order-history-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .order-card {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .order-card h3 {
+    margin: 0;
+    font-size: 1.2em;
+  }
+  
+  .order-card p {
+    margin: 5px 0;
+    font-size: 0.9em;
+    color: #2c3e50; /* Dark color for table number and contact */
+    background-color: #dfe6e9; /* Light gray background for table and contact */
+    padding: 5px;
+    border-radius: 4px;
+  }
+  
+  .order-items-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+  }
+  
+  .order-item {
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+    background-color: #fce4ec; /* Light pink for ordered items */
+    color: #c2185b; /* Dark pink text color */
+  }
+  
+  .order-item:nth-child(even) {
+    background-color: #e3f2fd; /* Light blue for even ordered items */
+    color: #1976d2; /* Dark blue text color */
+  }
+  
+  .order-item:last-child {
+    border-bottom: none; /* Remove border from the last item */
+  }
+  
