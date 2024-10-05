@@ -14,12 +14,12 @@ const App = () => {
 
   const placeOrder = (orderDetails) => {
     setOrderHistory([...orderHistory, orderDetails]);
-    setCurrentOrder([]); // Clear current order after placing
+    setCurrentOrder([]); 
   };
 
   return (
     <div>
-      <Menu addToOrder={addToOrder} /> {/* Ensure this is rendered */}
+      <Menu addToOrder={addToOrder} /> 
       <Order order={currentOrder} placeOrder={placeOrder} />
       <OrderHistory orders={orderHistory} />
       

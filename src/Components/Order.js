@@ -14,13 +14,26 @@ const Order = ({ order, placeOrder }) => {
   return (
     <div className="order-container">
       <h2>Your Order</h2>
-      <ul className="order-list">
-        {order.map((item, index) => (
-          <li key={index} className="order-item ordered-item"> {/* Add 'ordered-item' class */}
-            {item.name} - ${item.price.toFixed(2)}
-          </li>
-        ))}
-      </ul>
+
+      {/* Table to display order items */}
+      <table className="order-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Item</th>
+            <th>Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          {order.map((item, index) => (
+            <tr key={index}>
+              <td>{index + 1}</td> {/* Displaying ID based on index */}
+              <td>{item.name}</td>
+              <td>${item.price.toFixed(2)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
 
       <h3>Place Order</h3>
       <div className="input-group">
