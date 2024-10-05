@@ -1,3 +1,4 @@
+// src/components/Order.js
 import React, { useState } from 'react';
 import './Order.css'; // Import CSS for styling
 
@@ -7,8 +8,33 @@ const Order = ({ order, placeOrder }) => {
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
 
+  // Function to group items by ID and sum quantities
+  const groupOrderItems = (orderItems) => {
+    const groupedItems = {};
+
+    orderItems.forEach(item => {
+      if (groupedItems[item.id]) {
+        groupedItems[item.id].quantity += 1; // Increment quantity for existing item
+      } else {
+        groupedItems[item.id] = { ...item, quantity: 1 }; // Create new entry for new item
+      }
+    });
+
+    return Object.values(groupedItems); // Return as an array
+  };
+
   const handleOrderPlacement = () => {
-    placeOrder({ tableNumber, contactNumber, date, time, orderItems: order });
+    const groupedItems = groupOrderItems(order);
+    const newOrder = { tableNumber, contactNumber, date, time, orderItems: groupedItems };
+
+    // Place the order and update order history
+    placeOrder(newOrder);
+
+    // Optionally, reset the form or notify the user of success
+    setTableNumber('');
+    setContactNumber('');
+    setDate('');
+    setTime('');
   };
 
   return (
@@ -21,15 +47,17 @@ const Order = ({ order, placeOrder }) => {
           <tr>
             <th>ID</th>
             <th>Item</th>
+            <th>Quantity</th>
             <th>Cost</th>
           </tr>
         </thead>
         <tbody>
-          {order.map((item, index) => (
-            <tr key={index}>
+          {groupOrderItems(order).map((item, index) => (
+            <tr key={item.id}>
               <td>{index + 1}</td> {/* Displaying ID based on index */}
               <td>{item.name}</td>
-              <td>${item.price.toFixed(2)}</td>
+              <td>{item.quantity}</td> {/* Display the quantity */}
+              <td>${(item.price * item.quantity).toFixed(2)}</td> {/* Display total cost */}
             </tr>
           ))}
         </tbody>

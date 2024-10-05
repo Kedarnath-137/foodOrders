@@ -23,6 +23,9 @@ const Menu = ({ addToOrder }) => {
             // Clone the data to keep track of available quantities
             const updatedData = data.map(item => ({ ...item, available_quantity: item.available_quantity }));
             setMenuItems(updatedData);
+
+            // Store the fetched data in localStorage
+            localStorage.setItem('menuItems', JSON.stringify(updatedData));
           } else {
             console.warn('Menu items array is empty or invalid');
             setMenuItems([]);
@@ -39,7 +42,14 @@ const Menu = ({ addToOrder }) => {
       }
     };
 
-    fetchData();
+    // Check localStorage for menu items first
+    const storedMenuItems = localStorage.getItem('menuItems');
+    if (storedMenuItems) {
+      setMenuItems(JSON.parse(storedMenuItems));
+      setLoading(false); // Stop loading since we have data
+    } else {
+      fetchData(); // Fetch from API if no localStorage data
+    }
   }, []);
 
   const handleAddToOrder = (item) => {
@@ -59,6 +69,9 @@ const Menu = ({ addToOrder }) => {
       });
 
       setMenuItems(updatedMenuItems);
+
+      // Update localStorage with the new quantities
+      localStorage.setItem('menuItems', JSON.stringify(updatedMenuItems));
     }
   };
 

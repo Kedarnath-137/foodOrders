@@ -1,5 +1,6 @@
+// src/components/OrderHistory.js
 import React from 'react';
-import './OrderHistory.css'; 
+import './OrderHistory.css';
 
 const OrderHistory = ({ orders }) => {
   return (
@@ -27,7 +28,7 @@ const OrderHistory = ({ orders }) => {
                   <ul className="order-items-list">
                     {order.orderItems.map((item, idx) => (
                       <li key={idx} className="order-item">
-                        {item.name} - ${item.price.toFixed(2)}
+                        {item.name} - ${item.price.toFixed(2)} (Quantity: {item.quantity})
                       </li>
                     ))}
                   </ul>
